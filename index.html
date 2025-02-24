@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 30px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus, select:focus {
+      border-color: #4caf50;
+      outline: none;
+    }
+    
+    .sub {
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .forgot-password {
+      margin-top: 15px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .forgot-password:hover {
+      color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div><h2>Login</h2></div>
+    
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <input type="text" id="username" name="username" placeholder="Username" required>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <select id="profession" name="profession" required>
+        <option value="">Select Profession</option>
+        <option value="teacher">Teacher</option>
+        <option value="student">Student</option>
+      </select>
+      <button type="submit" id="loginBtn">Log In</button>
+      <a href="#" class="forgot-password">Forgot Password?</a>
+    </form>
+  </div>
+
+  <script>
+    function handleLogin(event) {
+      event.preventDefault();
+      
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var profession = document.getElementById("profession").value;
+
+      if (!username) {
+        alert("Please enter a username.");
+        return false;
+      }
+
+      if (!password) {
+        alert("Please enter a password.");
+        return false;
+      }
+
+      if (!profession) {
+        alert("Please select a profession before logging in.");
+        return false;
+      }
+
+      if (profession === "teacher") {
+        window.location.href = "teacher.html";
+      } else if (profession === "student") {
+        window.location.href = "student.html";
+      }
+      
+      return false;
+    }
+  </script>
+</body>
+</html>

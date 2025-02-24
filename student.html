@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rosybrown;
+            padding: 20px;
+            color: white;
+        }
+        #college_logo {
+            border-radius: 20px;
+            height: 100px;
+        }
+        #user_photo {
+            border-radius: 50%;
+            width: 90px;
+            height: 100px;
+        }
+        /* Removed static #total_att background color */
+    </style>
+</head>
+<body>
+    <!-- Header with Responsive Images -->
+    <div class="header">
+        <img id="college_logo" src="Screenshot 2025-02-23 151445.png" alt="College Logo" class="img-fluid">
+        <div class="info text-center">
+            <h1 style="font-size:150%;">CHAITANYA BHARATI INSTITUTE OF TECHNOLOGY</h1>
+            <h2></h2>
+        </div>
+        <div>
+            <img id="user_photo" src="Screenshot 2025-02-23 153246.png" alt="User Photo" class="img-fluid">
+            <br>
+            <span>1601-23-733-047</span>
+        </div>
+    </div>
+
+    <!-- Content wrapped in container-md -->
+    <div class="container-md mt-3">
+        <!-- Total Attendance with Span -->
+        <div class="card mb-3" id="total_att" style="margin-left: 20%; margin-right: 20%;">
+            <div class="card-body text-center">
+                <strong>Total Attendance: <span id="attendancePercentage">79%</span></strong><br>
+                <strong>Total No.of classes attended is: 21/30</strong>
+            </div>
+        </div>
+
+        <!-- Subject-wise Attendance -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>Subject-wise Attendance</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>s no.</th>
+                        <th>subject</th>
+                        <th>faculty</th>
+                        <th>classes held</th>
+                        <th>classes attended</th>
+                        <th>percentage</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Date-wise Attendance -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>Date-wise Attendance</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>date(day)</th>
+                        <th>1<br>9:10-10:00</th>
+                        <th>2<br>10:10-11:00</th>
+                        <th>3<br>11:10-12:00</th>
+                        <th>4<br>12:10-1:00</th>
+                        <th>5<br>1:00-2:00</th>
+                        <th>6<br>2:00-3:00</th>
+                    </tr>
+                    <tr>
+                        <td>01/01/2024</td>
+                        <td>P</td>
+                        <td>A</td>
+                        <td>P</td>
+                        <td>P</td>
+                        <td>A</td>
+                        <td>P</td>
+                    </tr>
+                    <tr>
+                        <td>01/01/2024</td>
+                        <td>P</td>
+                        <td>A</td>
+                        <td>P</td>
+                        <td>P</td>
+                        <td>A</td>
+                        <td>P</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to update total attendance background color
+        function updateAttendanceColor() {
+            // Get the span element with the percentage
+            const percentageSpan = document.getElementById("attendancePercentage");
+            // Extract the percentage (e.g., "70%") and convert to number
+            const percentage = parseInt(percentageSpan.textContent, 10);
+
+            // Get the card element to change its background
+            const totalAttCard = document.getElementById("total_att");
+
+            // Set background color based on percentage
+            if (percentage > 75) {
+                totalAttCard.style.backgroundColor = "#28a745"; // Green
+            } else {
+                totalAttCard.style.backgroundColor = "#dc3545"; // Red
+            }
+        }
+
+        // Run the function when the page loads
+        window.onload = updateAttendanceColor;
+    </script>
+</body>
+</html>

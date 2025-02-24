@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Attendance Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rosybrown;
+            padding: 20px;
+            color: white;
+        }
+        #college_logo {
+            border-radius: 20px;
+            height: 100px;
+        }
+        #user_photo {
+            border-radius: 50%;
+            width: 90px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img id="college_logo" src="Screenshot 2025-02-23 151445.png" alt="College Logo" class="img-fluid">
+        <div class="info text-center">
+            <h1 style="font-size:150%;">CHAITANYA BHARATI INSTITUTE OF TECHNOLOGY</h1>
+            <h2></h2>
+        </div>
+        <div>
+            <img id="user_photo" src="Screenshot 2025-02-23 153246.png" alt="Teacher Photo" class="img-fluid">
+            <br>
+            <span>Teacher ID: T-12345</span>
+        </div>
+    </div>
+
+    <!-- Content wrapped in container-md -->
+    <div class="container-md mt-3">
+        <!-- Dropdown for Sections -->
+        <div class="mb-3">
+            <label for="sectionSelect" class="form-label"><strong>Select Section:</strong></label>
+            <select id="sectionSelect" class="form-select" onchange="displayAttendanceTable()">
+                <option value="">-- Choose a Section --</option>
+                <option value="sectionA">Section A</option>
+                <option value="sectionB">Section B</option>
+            </select>
+        </div>
+
+        <!-- Button to Add Attendance (Hidden by default) -->
+        <div class="mb-3" id="addAttendanceButton" style="display: none;">
+            <button class="btn btn-primary" onclick="addAttendanceColumn()">Add Attendance for New Date</button>
+        </div>
+
+        <!-- Section A Table -->
+        <div class="card mb-3" id="sectionACard" style="display: none;">
+            <div class="card-header">
+                <strong>Attendance for Section A</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover" id="sectionATable">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>2024-02-01</th>
+                            <th>2024-02-02</th>
+                            <th>2024-02-03</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Student 1</td>
+                            <td>P</td>
+                            <td>A</td>
+                            <td>P</td>
+                        </tr>
+                        <tr>
+                            <td>Student 2</td>
+                            <td>A</td>
+                            <td>P</td>
+                            <td>P</td>
+                        </tr>
+                        <tr>
+                            <td>Student 3</td>
+                            <td>P</td>
+                            <td>P</td>
+                            <td>A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section B Table -->
+        <div class="card mb-3" id="sectionBCard" style="display: none;">
+            <div class="card-header">
+                <strong>Attendance for Section B</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover" id="sectionBTable">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>2024-02-01</th>
+                            <th>2024-02-02</th>
+                            <th>2024-02-03</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Student 4</td>
+                            <td>P</td>
+                            <td>P</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Student 5</td>
+                            <td>A</td>
+                            <td>A</td>
+                            <td>P</td>
+                        </tr>
+                        <tr>
+                            <td>Student 6</td>
+                            <td>P</td>
+                            <td>A</td>
+                            <td>P</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show/hide section tables and toggle add attendance button
+        function displayAttendanceTable() {
+            const sectionSelect = document.getElementById("sectionSelect");
+            const selectedSection = sectionSelect.value;
+            const sectionACard = document.getElementById("sectionACard");
+            const sectionBCard = document.getElementById("sectionBCard");
+            const addAttendanceButton = document.getElementById("addAttendanceButton");
+
+            // Hide all tables and button by default
+            sectionACard.style.display = "none";
+            sectionBCard.style.display = "none";
+            addAttendanceButton.style.display = "none";
+
+            // Show the selected section table and button
+            if (selectedSection === "sectionA") {
+                sectionACard.style.display = "block";
+                addAttendanceButton.style.display = "block";
+            } else if (selectedSection === "sectionB") {
+                sectionBCard.style.display = "block";
+                addAttendanceButton.style.display = "block";
+            }
+        }
+
+        // Function to add a new attendance column
+        function addAttendanceColumn() {
+            const sectionSelect = document.getElementById("sectionSelect");
+            const selectedSection = sectionSelect.value;
+
+            if (!selectedSection) {
+                alert("Please select a section first!");
+                return;
+            }
+
+            // Prompt for the date
+            const date = prompt("Enter the date for attendance (e.g., 2024-02-24):");
+            if (!date) return;
+
+            // Determine which table to update
+            const tableId = selectedSection === "sectionA" ? "sectionATable" : "sectionBTable";
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector("tbody");
+            const rows = tbody.getElementsByTagName("tr");
+
+            // Add new column to header
+            const thead = table.querySelector("thead tr");
+            const th = document.createElement("th");
+            th.textContent = date;
+            thead.appendChild(th);
+
+            // Prompt for attendance for each student
+            for (let row of rows) {
+                const studentName = row.cells[0].textContent;
+                const attendance = prompt(`Enter attendance for ${studentName} on ${date} (P for Present, A for Absent):`);
+                const td = document.createElement("td");
+                td.textContent = attendance ? attendance.toUpperCase() : "A"; // Default to Absent if no input
+                row.appendChild(td);
+            }
+        }
+    </script>
+</body>
+</html>
